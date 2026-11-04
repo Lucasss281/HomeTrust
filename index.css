@@ -23,6 +23,7 @@ header {
     backdrop-filter: blur(8px);
     border-radius: 50px;                     /* formato de bolha/pílula */
     padding: 6px 14px;
+    padding-right: 1000px;
     box-shadow: 0 4px 12px rgba(1, 74, 84, 0.15);
 }
 
@@ -56,16 +57,17 @@ header {
 /* Bolha do menu */
 .menu-bolha {
     align-items: center;
-    background: rgb(2, 54, 52);
+    background: rgb(8, 39, 75);
     height: 30px;
-    width: 1300px;
+    width: 1000px;
     display: flex;
     gap: 20px;
+    padding: 1.5px 50px;
 }
 
 .menu-bolha a {
     text-decoration: none;
-    color: rgb(229, 234, 232);
+    color: rgb(236, 240, 246);
     font-weight: 500;
     transition: color 0.2s;
 }
