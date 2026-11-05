@@ -1,0 +1,261 @@
+
+h1 {
+    color: rgb(0, 0, 0);
+    text-align: center;
+}
+
+
+/* ===== HEADER FIXO ===== */
+header {
+    position: fixed;          /* fica parado no topo ao rolar */
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;   /* bolha da logo em cima, menu por baixo */
+    align-items: flex-start;  /* as duas encostadas à esquerda */
+    gap: 12px;                /* espaço entre a bolha da logo e a do menu */
+    padding: 10px 100px;      /* 100px de espaço nas bordas laterais */
+    z-index: 100;             /* fica por cima do conteúdo */
+}
+
+/* ===== AS BOLHAS ===== */
+.bolha {
+    background: rgba(0, 150, 135, 0.88); /* efeito vidro verde */
+
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 50px;
+
+    padding: 10px 20px;
+    padding-right: 1000px;
+
+    box-shadow:
+        0 4px 15px rgba(0, 0, 0, 0.15),
+        0 0 15px rgba(15, 0, 220, 0.2);
+
+    transition: all 0.3s ease;
+    background: linear-gradient
+    (
+    135deg,
+    #1E9C8A,
+    #163792,
+    );
+}
+
+/* Bolha da logo */
+.logo-bolha {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: rgb(2, 62, 45);
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.logo-img {
+    width: 50px;
+    height: 50px;
+    border-radius: 10%;
+    object-fit: cover;
+    flex-shrink: 10px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: #f4f6f9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+/* Bolha do menu */
+.menu-bolha {
+    align-items: center;
+    justify-content: center;
+    background: rgb(12, 62, 119);
+    height: 30px;
+    width: 1050px;
+    display: flex;
+    gap: 20px;
+    padding: 1.5px 50px;
+}
+
+:root {
+  --bg: #A6E0D4;
+  --fg: #0B2230;
+  --muted: #36596A;
+  --line: #8CCABD;
+  --strong: #5E8F96;
+  --font-display: "Bricolage Grotesque", "Arial Narrow", Arial, sans-serif;
+  --font-body: "Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  padding-inline: 16px;
+  background-color: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.55;
+}
+
+/* brilhos suaves no fundo */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(60vmax 45vmax at 105% -5%, rgba(255,255,255,0.50), transparent 60%),
+    radial-gradient(55vmax 45vmax at -10% 105%, rgba(30,156,138,0.32), transparent 60%),
+    radial-gradient(40vmax 30vmax at 50% 45%, rgba(255,255,255,0.18), transparent 70%);
+}
+
+h2, h3 {
+  font-family: var(--font-display);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+  margin: 0;
+}
+p { margin: 0; }
+
+.wrap { max-width: 1120px; margin-inline: auto; }
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* secção */
+section.block {
+  padding-block: 64px;
+  border-top: 1px solid var(--line);
+  scroll-margin-top: 150px;
+}
+
+.head {
+  display: grid;
+  gap: 12px;
+  max-width: 62ch;
+}
+.head h2 { font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 800; }
+.head p { color: var(--muted); }
+
+/* sobre nós: duas colunas */
+.about {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+  gap: 48px;
+  align-items: start;
+}
+.about > * { min-width: 0; }
+
+/* caixa escura */
+.callout {
+  margin-top: 24px;
+  background: #0B2230;
+  color: #E8F0F6;
+  border-radius: 14px;
+  padding: 18px 20px;
+  font-size: 15px;
+  max-width: 62ch;
+}
+.callout b { color: #FFFFFF; }
+
+/* lista da direita */
+.facts article {
+  padding: 22px 0;
+  border-top: 1px solid var(--strong);
+  display: grid;
+  gap: 6px;
+}
+.facts article:first-child { border-top: 0; padding-top: 0; }
+.facts h3 { font-size: 24px; }
+.facts p { color: var(--muted); }
+
+/* telemóvel */
+@media (max-width: 820px) {
+  .about { grid-template-columns: 1fr; gap: 28px; }
+}
+
+.como-funciona {
+    color: rgb(7, 31, 67);
+    font-weight: 500;
+    transition: color 0.2s;
+}
+h3 {
+    color: rgb(0, 0, 0);
+    text-align: center-left;
+    width: 200px;
+    height: 200px;
+    background-color: rgb(122, 131, 101);
+    border: 2px solid black;
+    border-radius: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgb(9, 9, 9);
+}
+
+
+.menu-bolha a {
+    text-decoration: none;
+    color: rgb(236, 240, 246);
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.menu-bolha a:hover {
+    color: rgb(11, 179, 131);
+}
+
+/* Espaço para o conteúdo não ficar escondido atrás do header fixo */
+main {
+    padding-top: 160px;
+}
+
+section {
+    min-height: 80vh;   /* espaço para se ver a rolagem entre seções */
+    padding: 120px;
+    scroll-margin-top: 60px; /* ao clicar num link, a seção não fica atrás do header */
+}
+
+body {
+    background-color: rgba(11, 179, 131, 0.297);
+}
+
+/* Fundo que fica PARADO enquanto o conteúdo rola */
+.parado {
+
+    background-image:
+     linear-gradient(
+            rgba(255, 255, 255, 0.06) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(255, 255, 255, 0.06) 1px,
+            transparent 1px
+        ),
+         url('fundo.jpg');
+
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+}
+
