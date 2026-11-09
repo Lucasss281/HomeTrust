@@ -50,6 +50,7 @@ header {
     display: flex;
     align-items: center;
     gap: 10px;
+    width: 1205px;
     text-decoration: none;
     color: rgb(2, 62, 45);
     font-weight: bold;
@@ -78,7 +79,7 @@ header {
     justify-content: center;
     background: rgb(12, 62, 119);
     height: 30px;
-    width: 1050px;
+    width: 1200px;
     display: flex;
     gap: 20px;
     padding: 1.5px 50px;
