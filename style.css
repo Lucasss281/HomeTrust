@@ -1,24 +1,52 @@
 
-/* =========================================
-   1. VARIÁVEIS GLOBAIS
-========================================= */
+/* =====================================================
+   HOMETRUST
+===================================================== */
 
 :root {
+    /* Cores principais */
     --bg: #A6E0D4;
     --fg: #0B2230;
     --muted: #36596A;
+
+    /* Bordas */
     --line: #8CCABD;
     --strong: #5E8F96;
 
-    --font-display: "Bricolage Grotesque", "Arial Narrow", Arial, sans-serif;
-    --font-body: "Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
-    --font-mono: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+    /* Cores de ação */
+    --action: #0F6B5C;
+    --action-light: #1E9C8A;
+
+    /* Outras cores */
+    --yellow: #F2C94C;
+    --yellow-text: #3A2E00;
+    --orange: #E8884A;
+
+    /* Cartões */
+    --card: #FFFFFF;
+    --dark-card: #0B2230;
+
+    /* Gradiente da marca */
+    --brand-gradient: linear-gradient(
+        100deg,
+        #14796A,
+        #1B6F9A
+    );
+
+    /* Tipografia */
+    --font-display: "Bricolage Grotesque", Arial, sans-serif;
+    --font-body: "Figtree", system-ui, sans-serif;
+    --font-mono: "IBM Plex Mono", monospace;
+
+    /* Sombras */
+    --shadow-soft: 0 8px 30px rgba(11, 34, 48, 0.09);
+    --shadow-strong: 0 15px 45px rgba(11, 34, 48, 0.15);
 }
 
 
-/* =========================================
+/* =====================================================
    2. RESET E CONFIGURAÇÕES GERAIS
-========================================= */
+===================================================== */
 
 * {
     box-sizing: border-box;
@@ -26,11 +54,14 @@
 
 html {
     scroll-behavior: smooth;
+    scroll-padding-top: 150px;
 }
 
 body {
     margin: 0;
-    padding-inline: 16px;
+    padding: 0;
+
+    overflow-x: hidden;
 
     background-color: var(--bg);
     color: var(--fg);
@@ -40,35 +71,50 @@ body {
     line-height: 1.55;
 }
 
+img {
+    max-width: 100%;
+}
+
+a {
+    color: inherit;
+}
+
+button {
+    font: inherit;
+}
+
 p {
     margin: 0;
 }
 
-h1 {
-    color: rgb(0, 0, 0);
-    text-align: center;
-}
-
-h2, h3 {
+h1, h2, h3, h4 {
     font-family: var(--font-display);
-    line-height: 1.05;
+    color: var(--fg);
+    line-height: 1.08;
     letter-spacing: -0.02em;
-    text-wrap: balance;
     margin: 0;
 }
 
+h1, h2 {
+    font-weight: 800;
+}
 
-/* =========================================
-   3. FUNDO E EFEITOS VISUAIS
-========================================= */
+section {
+    scroll-margin-top: 155px;
+}
 
-/* Brilhos suaves no fundo */
+
+/* =====================================================
+   3. FUNDO COM BRILHOS
+===================================================== */
 
 body::before {
     content: "";
+
     position: fixed;
     inset: 0;
-    z-index: -1;
+
+    z-index: -2;
     pointer-events: none;
 
     background:
@@ -89,33 +135,106 @@ body::before {
         );
 }
 
-/* Fundo com imagem fixa */
 
-.parado {
+/* =====================================================
+   4. GRELHA ARQUITETÓNICA FIXA
+===================================================== */
+
+body::after {
+    content: "";
+
+    position: fixed;
+    inset: 0;
+
+    z-index: -1;
+    pointer-events: none;
+
     background-image:
         linear-gradient(
-            rgba(255, 255, 255, 0.06) 1px,
+            rgba(11,34,48,0.10) 1px,
             transparent 1px
         ),
         linear-gradient(
             90deg,
-            rgba(255, 255, 255, 0.06) 1px,
+            rgba(11,34,48,0.10) 1px,
             transparent 1px
         ),
-        url("fundo.jpg");
+        linear-gradient(
+            rgba(11,34,48,0.045) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(11,34,48,0.045) 1px,
+            transparent 1px
+        );
 
-    background-attachment: fixed;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+    background-size:
+        240px 240px,
+        240px 240px,
+        48px 48px,
+        48px 48px;
 
-    min-height: 100vh;
+    -webkit-mask-image:
+        radial-gradient(
+            120% 90% at 50% 0%,
+            #000 20%,
+            transparent 85%
+        );
+
+    mask-image:
+        radial-gradient(
+            120% 90% at 50% 0%,
+            #000 20%,
+            transparent 85%
+        );
 }
 
 
-/* =========================================
-   4. HEADER FIXO
-========================================= */
+/* =====================================================
+   5. ELEMENTOS GERAIS
+===================================================== */
+
+.container {
+    width: min(1180px, calc(100% - 40px));
+    margin-inline: auto;
+}
+
+.eyebrow {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 500;
+}
+
+.section-head {
+    display: grid;
+    gap: 12px;
+    max-width: 700px;
+    margin-bottom: 35px;
+}
+
+.section-head h2 {
+    font-size: clamp(30px, 4vw, 46px);
+}
+
+.section-head p {
+    color: var(--muted);
+}
+
+.brand-text {
+    background: var(--brand-gradient);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+
+/* =====================================================
+   6. HEADER FIXO
+===================================================== */
 
 header {
     position: fixed;
@@ -123,182 +242,457 @@ header {
     left: 0;
     right: 0;
 
+    width: 100%;
+
+    z-index: 1000;
+
+    padding: 12px 20px;
+
+    display: flex;
+    justify-content: center;
+}
+
+.header-inner {
+    width: min(1280px, 100%);
+
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    gap: 12px;
-
-    padding: 10px 100px;
-
-    z-index: 100;
+    gap: 10px;
 }
 
 
-/* =========================================
-   5. BOLHAS DO HEADER
-========================================= */
+/* =====================================================
+   7. PRIMEIRA BARRA - LOGÓTIPO E DOWNLOAD
+===================================================== */
 
-/* Estilo geral das bolhas */
+.top-bar {
+    min-height: 78px;
 
-.bolha {
-    background: linear-gradient(
-        135deg,
-        #1E9C8A,
-        #163792
-    );
-
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-
-    border: 1px solid rgba(255, 255, 255, 0.25);
-    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 
     padding: 10px 20px;
 
-    box-shadow:
-        0 4px 15px rgba(0, 0, 0, 0.15),
-        0 0 15px rgba(15, 0, 220, 0.2);
+    background: linear-gradient(
+        100deg,
+        #1E9C8A,
+        #1B8FA3
+    );
 
-    transition: all 0.3s ease;
+    border-radius: 50px;
+
+    box-shadow: var(--shadow-soft);
 }
 
 
-/* Bolha da logomarca */
+/* Logótipo */
 
 .logo-bolha {
     display: flex;
     align-items: center;
-    gap: 10px;
-
-    width: 1205px;
+    gap: 13px;
 
     text-decoration: none;
-    color: rgb(2, 62, 45);
 
-    font-weight: bold;
-    font-size: 1.2rem;
+    font-family: var(--font-display);
+    font-size: 23px;
+    font-weight: 800;
+
+    color: #FFFFFF;
+}
+
+.logo-img {
+    width: 55px;
+    height: 55px;
+
+    object-fit: contain;
+
+    background: #FFFFFF;
+
+    padding: 5px;
+
+    border-radius: 13px;
+
+    flex-shrink: 0;
 }
 
 
-/* Imagem da logomarca */
+/* Botão descarregar */
 
-.logo-img {
-    width: 60px;
-    height: 60px;
+.download-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 
-    border-radius: 50%;
-    object-fit: cover;
+    padding: 12px 24px;
+
+    border-radius: 50px;
+
+    background: var(--fg);
+    color: #FFFFFF;
+
+    border: 2px solid rgba(255,255,255,0.35);
+
+    text-decoration: none;
+
+    font-weight: 700;
+    font-size: 14px;
+
+    transition: 0.25s ease;
+}
+
+.download-btn:hover {
+    background: #FFFFFF;
+    color: var(--fg);
+    transform: translateY(-2px);
+}
+
+
+/* =====================================================
+   8. SEGUNDA BARRA - MENU
+===================================================== */
+
+.nav-bar {
+    min-height: 56px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    padding: 8px 18px;
+
+    background: #0B2230;
+
+    border-radius: 14px;
+}
+
+.nav-links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+
+    gap: 5px;
+}
+
+.nav-links a {
+    text-decoration: none;
+
+    color: #CFE3EA;
+
+    padding: 9px 13px;
+
+    border-radius: 30px;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    transition: 0.2s ease;
+}
+
+.nav-links a:hover {
+    background: rgba(30,156,138,0.2);
+    color: #FFFFFF;
+}
+
+/* Secção selecionada através de âncora */
+
+.nav-links a:target {
+    background: #1E9C8A;
+    color: #0B2230;
+}
+
+
+/* Perfil de utilizador */
+
+.user-circle {
+    width: 38px;
+    height: 38px;
 
     flex-shrink: 0;
 
-    background-color: #f4f6f9;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    box-sizing: border-box;
-}
-
-
-/* Bolha do menu */
-
-.menu-bolha {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 20px;
 
-    background: rgb(12, 62, 119);
+    background: #A6E0D4;
+    color: #0B2230;
 
-    height: 30px;
-    width: 1200px;
+    border-radius: 50%;
 
-    padding: 1.5px 50px;
-}
+    font-family: var(--font-mono);
+    font-weight: 600;
+    font-size: 12px;
 
-
-/* Links do menu */
-
-.menu-bolha a {
     text-decoration: none;
-    color: rgb(236, 240, 246);
-
-    font-weight: 500;
-
-    transition: color 0.2s;
-}
-
-.menu-bolha a:hover {
-    color: rgb(11, 179, 131);
 }
 
 
-/* =========================================
-   6. CONTEÚDO PRINCIPAL
-========================================= */
+/* =====================================================
+   9. CONTEÚDO PRINCIPAL
+===================================================== */
 
 main {
-    padding-top: 160px;
+    padding-top: 180px;
 }
-
-section {
-    min-height: 80vh;
-    padding: 120px;
-
-    scroll-margin-top: 150px;
-}
-
-
-/* =========================================
-   7. SECÇÕES E ELEMENTOS GERAIS
-========================================= */
 
 section.block {
-    padding-block: 64px;
-
+    padding-block: 75px;
     border-top: 1px solid var(--line);
-
-    scroll-margin-top: 150px;
-}
-
-.wrap {
-    max-width: 1120px;
-    margin-inline: auto;
-}
-
-.eyebrow {
-    font-family: var(--font-mono);
-    font-size: 12px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-
-    color: var(--muted);
 }
 
 
-/* Cabeçalho das secções */
+/* =====================================================
+   10. INÍCIO - HERO
+===================================================== */
 
-.head {
+.hero {
+    padding-top: 35px;
+    padding-bottom: 85px;
+
     display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+
+    align-items: center;
+
+    gap: 0;
+}
+
+
+/* Cartão branco principal */
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+
+    background: #FFFFFF;
+
+    border: 1px solid var(--line);
+    border-radius: 24px;
+
+    padding: 65px 50px;
+
+    box-shadow: var(--shadow-strong);
+}
+
+.hero-content h1 {
+    font-size: clamp(38px, 5vw, 65px);
+    margin: 18px 0;
+}
+
+.hero-content > p {
+    color: var(--muted);
+    max-width: 500px;
+    font-size: 17px;
+}
+
+.hero-actions {
+    display: flex;
+    flex-wrap: wrap;
     gap: 12px;
 
-    max-width: 62ch;
+    margin-top: 30px;
 }
 
-.head h2 {
-    font-size: clamp(1.8rem, 4vw, 2.8rem);
+
+/* Botões */
+
+.btn-primary {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+
+    background: var(--brand-gradient);
+    color: #FFFFFF;
+
+    border: none;
+    border-radius: 50px;
+
+    padding: 14px 25px;
+
+    font-weight: 700;
+    text-decoration: none;
+
+    transition: 0.25s ease;
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-soft);
+}
+
+.btn-secondary {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+
+    border: 1px solid var(--line);
+    border-radius: 50px;
+
+    padding: 14px 25px;
+
+    color: var(--fg);
+    background: #FFFFFF;
+
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.btn-secondary:hover {
+    border-color: var(--action);
+    color: var(--action);
+}
+
+
+/* =====================================================
+   11. PAINEL ESCURO COM TELEMÓVEL
+===================================================== */
+
+.hero-panel {
+    position: relative;
+    z-index: 3;
+
+    margin-left: -45px;
+
+    min-height: 510px;
+
+    padding: 35px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    background: linear-gradient(
+        155deg,
+        #10304A,
+        #0D2B33
+    );
+
+    border-radius: 28px;
+
+    box-shadow: var(--shadow-strong);
+}
+
+.hero-panel > p {
+    color: #C5D4DC;
+    text-align: center;
+    margin-bottom: 25px;
+    font-size: 14px;
+}
+
+
+/* Telemóvel de demonstração */
+
+.phone {
+    width: 245px;
+    max-width: 100%;
+
+    min-height: 390px;
+
+    background: #FFFFFF;
+
+    border: 7px solid #263C4B;
+    border-radius: 35px;
+
+    padding: 20px 14px;
+
+    box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+}
+
+.phone-notch {
+    width: 65px;
+    height: 6px;
+
+    background: #263C4B;
+    border-radius: 10px;
+
+    margin: -10px auto 20px;
+}
+
+.phone-header {
+    font-family: var(--font-display);
     font-weight: 800;
+    font-size: 17px;
+    margin-bottom: 15px;
 }
 
-.head p {
+.phone-property {
+    background: #EAF5F2;
+    border: 1px solid #D2E8E1;
+    border-radius: 12px;
+
+    padding: 12px;
+    margin-bottom: 12px;
+}
+
+.phone-image {
+    height: 95px;
+
+    background: linear-gradient(
+        135deg,
+        #8CCABD,
+        #1B6F9A
+    );
+
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.phone-property b {
+    font-size: 13px;
+}
+
+.phone-property p {
     color: var(--muted);
+    font-size: 11px;
+}
+
+.phone-score {
+    display: inline-block;
+
+    margin-top: 7px;
+
+    background: #D8F3E7;
+    color: #0F6B5C;
+
+    padding: 4px 9px;
+
+    border-radius: 20px;
+
+    font-size: 10px;
+    font-weight: 700;
 }
 
 
-/* =========================================
-   8. SECÇÃO SOBRE NÓS
-========================================= */
+/* =====================================================
+   12. CAIXAS DE AVISO
+===================================================== */
+
+.callout {
+    margin-top: 25px;
+
+    background: #0B2230;
+    color: #E8F0F6;
+
+    padding: 20px;
+
+    border-radius: 14px;
+
+    font-size: 15px;
+}
+
+.callout b {
+    color: #FFFFFF;
+}
+
+
+/* =====================================================
+   13. SOBRE NÓS
+===================================================== */
 
 .about {
     display: grid;
@@ -307,159 +701,762 @@ section.block {
         minmax(0, 1fr)
         minmax(0, 1.1fr);
 
-    gap: 48px;
+    gap: 45px;
+
     align-items: start;
 }
 
-.about > * {
-    min-width: 0;
+.facts {
+    display: grid;
+    gap: 18px;
 }
-
-
-/* Caixas de informação */
-
-.callout {
-    margin-top: 24px;
-
-    background: #0B2230;
-    color: #E8F0F6;
-
-    border-radius: 14px;
-
-    padding: 18px 20px;
-
-    font-size: 15px;
-
-    flex: 1;
-}
-
-
-/* Artigos de informação */
 
 .facts article {
-    margin-top: 24px;
+    background: #FFFFFF;
 
-    background: #0B2230;
-    color: #E8F0F6;
+    border: 1px solid var(--line);
+    border-radius: 16px;
 
-    border-radius: 14px;
+    padding: 25px;
 
-    padding: 18px 20px;
+    box-shadow: var(--shadow-soft);
 }
 
 .facts article h3 {
-    color: #f4f1f1;
+    font-size: 21px;
     margin-bottom: 12px;
 }
 
+.facts article p {
+    color: var(--muted);
+    font-size: 15px;
+}
 
-/* =========================================
-   9. SECÇÃO COMO FUNCIONA
-========================================= */
 
-/* Área que contém as duas caixas */
+/* =====================================================
+   14. COMO FUNCIONA - DOIS QUADRADOS
+===================================================== */
 
-.callouts {
+.how-grid {
+    display: grid;
+
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    gap: 25px;
+
+    width: 100%;
+    margin-top: 35px;
+}
+
+.how-card {
+    min-width: 0;
+
+    background: #FFFFFF;
+
+    border: 1px solid var(--line);
+    border-radius: 20px;
+
+    padding: 32px;
+
+    box-shadow: var(--shadow-soft);
+}
+
+.how-card h3 {
+    font-size: 25px;
+    margin-bottom: 22px;
+}
+
+
+/* Passos */
+
+.steps {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.steps li {
     display: flex;
-    gap: 24px;
+    align-items: flex-start;
+    gap: 14px;
+
+    padding: 17px 0;
+
+    border-bottom: 1px solid #E0EFEB;
+}
+
+.steps li:last-child {
+    border-bottom: none;
+}
+
+
+/* Números */
+
+.step-number {
+    flex-shrink: 0;
+
+    width: 36px;
+    height: 36px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #1E9C8A;
+    color: #FFFFFF;
+
+    border-radius: 50%;
+
+    font-family: var(--font-mono);
+    font-weight: 600;
+}
+
+.step-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.step-content b {
+    display: block;
+
+    color: var(--fg);
+    font-size: 15px;
+
+    margin-bottom: 5px;
+}
+
+.step-content p {
+    color: var(--muted);
+    font-size: 14px;
+}
+
+
+/* =====================================================
+   15. PONTUAÇÃO DE FIABILIDADE
+===================================================== */
+
+.reliability-card {
+    grid-column: 1 / -1;
+}
+
+.reliability-card > h3 {
+    font-size: clamp(23px, 3vw, 32px);
+}
+
+.reliability-intro {
+    color: var(--muted);
+    margin-bottom: 28px;
+    max-width: 800px;
+}
+
+
+/* Tabelas */
+
+.reliability-tables {
+    display: grid;
+
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    gap: 25px;
+}
+
+.reliability-tables h4 {
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+
+.reliability-table {
+    width: 100%;
+    border-collapse: collapse;
+
+    border: 1px solid var(--line);
+    border-radius: 12px;
+
+    overflow: hidden;
+
+    font-size: 14px;
+}
+
+.reliability-table th {
+    background: #0B2230;
+    color: #FFFFFF;
+
+    padding: 14px;
+
+    text-align: left;
+    font-weight: 600;
+}
+
+.reliability-table td {
+    padding: 14px;
+
+    border-bottom: 1px solid #E0EFEB;
+
+    color: var(--fg);
+}
+
+.reliability-table tr:last-child td {
+    border-bottom: none;
+}
+
+.reliability-table td:last-child,
+.reliability-table th:last-child {
+    text-align: center;
+}
+
+
+/* Níveis */
+
+.reliability-title {
+    margin-top: 35px;
+    margin-bottom: 15px;
+
+    font-size: 19px;
+}
+
+.reliability-levels {
+    display: grid;
+
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+
+    gap: 15px;
+}
+
+.level {
+    padding: 20px;
+
+    border-radius: 14px;
+
+    background: #F4FAF8;
+
+    text-align: center;
+}
+
+.level b {
+    display: block;
+    margin-bottom: 6px;
+}
+
+.level span {
+    font-family: var(--font-mono);
+    font-size: 12px;
+}
+
+.level-high {
+    border: 1px solid #36C98F;
+}
+
+.level-high b {
+    color: #0F8058;
+}
+
+.level-medium {
+    border: 1px solid var(--yellow);
+}
+
+.level-medium b {
+    color: #977000;
+}
+
+.level-low {
+    border: 1px solid #E27676;
+}
+
+.level-low b {
+    color: #B33F3F;
+}
+
+
+/* Nota legal */
+
+.reliability-note {
+    margin-top: 25px;
+
+    padding: 18px;
+
+    background: #EAF5F2;
+
+    border-left: 4px solid var(--strong);
+
+    border-radius: 8px;
+
+    color: var(--muted);
+
+    font-size: 13px;
+}
+
+
+/* =====================================================
+   16. DESTAQUES
+===================================================== */
+
+.highlight-grid {
+    display: grid;
+
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+
+    gap: 20px;
+}
+
+.highlight-card {
+    background: #FFFFFF;
+
+    border: 1px solid var(--line);
+    border-radius: 18px;
+
+    padding: 28px;
+
+    box-shadow: var(--shadow-soft);
+}
+
+.highlight-card h3 {
+    font-size: 21px;
+    margin-bottom: 12px;
+}
+
+.highlight-card p {
+    color: var(--muted);
+    font-size: 14px;
+}
+
+
+/* =====================================================
+   17. SERVIÇOS
+===================================================== */
+
+.service-grid {
+    display: grid;
+
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+
+    gap: 20px;
+}
+
+.service-card {
+    background: #FFFFFF;
+
+    border: 1px solid var(--line);
+    border-radius: 18px;
+
+    padding: 30px;
+
+    box-shadow: var(--shadow-soft);
+}
+
+.service-number {
+    font-family: var(--font-mono);
+    font-size: 12px;
+
+    color: var(--action);
+
+    margin-bottom: 18px;
+}
+
+.service-card h3 {
+    font-size: 21px;
+    margin-bottom: 12px;
+}
+
+.service-card p {
+    color: var(--muted);
+    font-size: 14px;
+}
+
+
+/* =====================================================
+   18. PLANOS
+===================================================== */
+
+.plans-grid {
+    display: grid;
+
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+
+    gap: 22px;
 
     align-items: stretch;
+}
+
+.plan-card {
+    position: relative;
+
+    background: #FFFFFF;
+
+    border: 1px solid var(--line);
+    border-radius: 20px;
+
+    padding: 32px;
+
+    box-shadow: var(--shadow-soft);
+}
+
+.plan-card h3 {
+    font-size: 23px;
+    margin-bottom: 12px;
+}
+
+.plan-card p {
+    color: var(--muted);
+    font-size: 14px;
+}
+
+.plan-price {
+    font-family: var(--font-mono);
+    font-size: 28px;
+    font-weight: 600;
+
+    color: var(--fg);
+
+    margin: 22px 0;
+}
+
+.plan-features {
+    list-style: none;
+    padding: 0;
+
+    margin: 20px 0;
+}
+
+.plan-features li {
+    padding: 9px 0;
+
+    color: var(--muted);
+    font-size: 14px;
+
+    border-bottom: 1px solid #E0EFEB;
+}
+
+.plan-btn {
+    display: block;
+
+    width: 100%;
+
+    text-align: center;
+
+    background: var(--action);
+    color: #FFFFFF;
+
+    padding: 13px;
+
+    border-radius: 50px;
+
+    text-decoration: none;
+    font-weight: 700;
+
+    margin-top: 25px;
+}
+
+.plan-btn:hover {
+    background: #0B5147;
+}
+
+
+/* Plano mais escolhido */
+
+.plan-featured {
+    border: 2px solid var(--yellow);
+
+    transform: translateY(-8px);
+}
+
+.plan-badge {
+    position: absolute;
+
+    top: -14px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    background: var(--yellow);
+    color: var(--yellow-text);
+
+    padding: 6px 16px;
+
+    border-radius: 50px;
+
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 600;
+
+    white-space: nowrap;
+    text-transform: uppercase;
+}
+
+
+/* =====================================================
+   19. CONTACTOS
+===================================================== */
+
+.contact-card {
+    background: #FFFFFF;
+
+    border: 1px solid var(--line);
+    border-radius: 22px;
+
+    padding: 40px;
+
+    box-shadow: var(--shadow-soft);
+}
+
+.contact-card h2 {
+    margin-bottom: 15px;
+}
+
+.contact-card p {
+    color: var(--muted);
+    margin-bottom: 20px;
+}
+
+.contact-link {
+    color: var(--action);
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.contact-link:hover {
+    text-decoration: underline;
+}
+
+
+/* =====================================================
+   20. RODAPÉ
+===================================================== */
+
+footer {
+    margin-top: 50px;
+
+    border-top: 1px solid var(--strong);
+
+    padding: 30px 20px;
+
+    color: var(--muted);
+}
+
+.footer-inner {
+    width: min(1180px, 100%);
+    margin-inline: auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 20px;
     flex-wrap: wrap;
+}
 
-    margin-top: 24px;
+.footer-logo {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 20px;
+}
+
+.footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+}
+
+.footer-links a {
+    color: var(--muted);
+    font-size: 13px;
+    text-decoration: none;
+}
+
+.footer-links a:hover {
+    color: var(--action);
+}
+
+.footer-legal {
+    width: 100%;
+
+    padding-top: 20px;
+    margin-top: 10px;
+
+    border-top: 1px solid var(--line);
+
+    font-family: var(--font-mono);
+    font-size: 11px;
+
+    text-align: center;
 }
 
 
-/* Caixa dos inquilinos */
+/* =====================================================
+   21. RESPONSIVIDADE - TABLETS
+===================================================== */
 
-.callouts .callout-inquilinos {
-    background: #0B2230;
-    color: #E8F0F6;
+@media (max-width: 950px) {
 
-    border-radius: 14px;
+    .hero {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
 
-    padding: 18px 20px;
-
-    font-size: 15px;
-
-    flex: 1;
-}
-
-
-/* Caixa dos senhorios */
-
-.callout2 {
-    background: #0B2230;
-    color: #E8F0F6;
-
-    border-radius: 14px;
-
-    padding: 18px 20px;
-
-    font-size: 15px;
-
-    flex: 1;
-}
-
-.callout2 b {
-    color: #f4f1f1;
-}
-
-
-/* =========================================
-   10. ELEMENTOS ADICIONAIS
-========================================= */
-
-.como-funciona {
-    color: rgb(7, 31, 67);
-    font-weight: 500;
-
-    transition: color 0.2s;
-}
-
-
-/* =========================================
-   11. RESPONSIVIDADE
-========================================= */
-
-@media (max-width: 820px) {
-
-    /* Sobre nós passa a uma coluna */
+    .hero-panel {
+        margin-left: 0;
+    }
 
     .about {
         grid-template-columns: 1fr;
-        gap: 28px;
     }
 
-    /* Header adaptado ao telemóvel */
+    .plans-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .plan-featured {
+        transform: none;
+    }
+
+    .highlight-grid,
+    .service-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+}
+
+
+/* =====================================================
+   22. RESPONSIVIDADE - TELEMÓVEIS
+===================================================== */
+
+@media (max-width: 650px) {
+
+    body {
+        font-size: 15px;
+    }
 
     header {
-        padding: 10px 16px;
+        padding: 8px 10px;
     }
 
-    .logo-bolha,
-    .menu-bolha {
-        width: 100%;
+    .top-bar {
+        min-height: 65px;
+        padding: 8px 12px;
     }
 
-    .menu-bolha {
-        height: auto;
-        padding: 12px;
-        flex-wrap: wrap;
-        gap: 12px;
+    .logo-bolha {
+        font-size: 18px;
+        gap: 8px;
     }
 
-    /* Conteúdo adaptado */
+    .logo-img {
+        width: 45px;
+        height: 45px;
+    }
 
-    section {
-        padding: 50px 16px;
+    .download-btn {
+        padding: 10px 13px;
+        font-size: 11px;
+    }
+
+    .nav-bar {
+        justify-content: flex-start;
+        overflow-x: auto;
+        padding: 8px;
+        gap: 8px;
+    }
+
+    .nav-links {
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+        min-width: max-content;
+    }
+
+    .nav-links a {
+        font-size: 12px;
+        padding: 8px 11px;
+    }
+
+    .user-circle {
+        width: 32px;
+        height: 32px;
     }
 
     main {
-        padding-top: 150px;
+        padding-top: 160px;
     }
 
-    .callouts {
-        flex-direction: column;
+    .container {
+        width: calc(100% - 28px);
     }
+
+    .hero {
+        padding-top: 20px;
+        padding-bottom: 50px;
+    }
+
+    .hero-content {
+        padding: 35px 25px;
+    }
+
+    .hero-content h1 {
+        font-size: 39px;
+    }
+
+    .hero-panel {
+        min-height: 460px;
+        padding: 25px 15px;
+    }
+
+    section.block {
+        padding-block: 50px;
+    }
+
+    .section-head h2 {
+        font-size: 30px;
+    }
+
+    .how-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .reliability-card {
+        grid-column: auto;
+    }
+
+    .how-card {
+        padding: 23px;
+    }
+
+    .reliability-tables {
+        grid-template-columns: 1fr;
+    }
+
+    .reliability-table {
+        font-size: 12px;
+    }
+
+    .reliability-table td,
+    .reliability-table th {
+        padding: 10px 8px;
+    }
+
+    .reliability-levels {
+        grid-template-columns: 1fr;
+    }
+
+    .highlight-grid,
+    .service-grid,
+    .plans-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .plan-featured {
+        transform: none;
+    }
+
+    .contact-card {
+        padding: 25px;
+    }
+
+    .footer-inner {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .footer-links {
+        justify-content: center;
+    }
+
 }
