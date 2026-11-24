@@ -45,6 +45,457 @@
 
 
 /* =====================================================
+   1.1 ANIMAÇÕES GERAIS
+===================================================== */
+
+/* Entrada ao fazer scroll */
+
+.reveal {
+    opacity: 0;
+
+    transform: translateY(28px);
+
+    transition:
+        opacity 0.7s ease,
+        transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+
+    will-change: opacity, transform;
+}
+
+.reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Escalonamento entre elementos irmãos */
+
+.reveal-group > .reveal:nth-child(2) { transition-delay: 0.08s; }
+.reveal-group > .reveal:nth-child(3) { transition-delay: 0.16s; }
+.reveal-group > .reveal:nth-child(4) { transition-delay: 0.24s; }
+
+/* Respeitar utilizadores com movimento reduzido */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .reveal {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+    }
+}
+
+
+/* Gradiente animado nos textos da marca */
+
+@keyframes gradientShift {
+    0%, 100% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+}
+
+.brand-text {
+    background-size: 200% 200%;
+    animation: gradientShift 6s ease infinite;
+}
+
+
+/* Flutuação suave do telemóvel */
+
+@keyframes floatPhone {
+    0%, 100% {
+        transform: translateY(0) rotate(0deg);
+    }
+    50% {
+        transform: translateY(-14px) rotate(-1.2deg);
+    }
+}
+
+.phone {
+    animation: floatPhone 5.5s ease-in-out infinite;
+}
+
+/* Cartões dentro do telemóvel aparecem em sequência */
+
+@keyframes phoneCardIn {
+    from {
+        opacity: 0;
+        transform: translateY(14px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.phone-property {
+    animation: phoneCardIn 0.8s ease backwards;
+}
+
+.phone-property:nth-of-type(1) { animation-delay: 0.4s; }
+.phone-property:nth-of-type(2) { animation-delay: 0.9s; }
+
+
+/* Etiqueta de fiabilidade a pulsar */
+
+@keyframes pulseGlow {
+    0%, 100% {
+        box-shadow: 0 0 0 0 rgba(15, 107, 92, 0.35);
+    }
+    50% {
+        box-shadow: 0 0 0 7px rgba(15, 107, 92, 0);
+    }
+}
+
+.phone-score {
+    animation: pulseGlow 2.4s ease-in-out infinite;
+}
+
+
+/* Brilho que atravessa o botão principal */
+
+@keyframes shine {
+    from {
+        transform: translateX(-120%) skewX(-18deg);
+    }
+    to {
+        transform: translateX(240%) skewX(-18deg);
+    }
+}
+
+.btn-primary {
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-primary::after {
+    content: "";
+
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 45%;
+    height: 100%;
+
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,255,255,0.45),
+        transparent
+    );
+
+    transform: translateX(-120%) skewX(-18deg);
+
+    animation: shine 4.5s ease-in-out infinite;
+    animation-delay: 1.2s;
+
+    pointer-events: none;
+}
+
+
+/* Cartões: elevação suave no hover */
+
+.facts article,
+.how-card,
+.highlight-card,
+.service-card,
+.plan-card,
+.contact-card {
+    transition:
+        transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+        box-shadow 0.35s ease;
+}
+
+.facts article:hover,
+.how-card:hover,
+.highlight-card:hover,
+.service-card:hover,
+.plan-card:hover,
+.contact-card:hover {
+    transform: translateY(-7px);
+    box-shadow: var(--shadow-strong);
+}
+
+/* Números dos passos a escalar no hover */
+
+.steps li {
+    transition: transform 0.3s ease;
+}
+
+.steps li:hover {
+    transform: translateX(6px);
+}
+
+.step-number {
+    transition: transform 0.3s ease;
+}
+
+.steps li:hover .step-number {
+    transform: scale(1.15) rotate(8deg);
+}
+
+/* Badge do plano destacado */
+
+@keyframes badgeBounce {
+    0%, 100% {
+        transform: translateX(-50%) translateY(0);
+    }
+    50% {
+        transform: translateX(-50%) translateY(-5px);
+    }
+}
+
+.plan-badge {
+    animation: badgeBounce 2.8s ease-in-out infinite;
+}
+
+/* Botões secundários */
+
+.btn-secondary,
+.plan-btn {
+    transition: all 0.25s ease;
+}
+
+.btn-secondary:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-soft);
+}
+
+.plan-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-soft);
+}
+
+/* Logótipo do cabeçalho a rodar ligeiramente */
+
+.logo-img {
+    transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.logo-bolha:hover .logo-img {
+    transform: rotate(-8deg) scale(1.08);
+}
+
+/* Círculo de utilizador */
+
+.user-circle {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.user-circle:hover {
+    transform: scale(1.12);
+    box-shadow: 0 0 0 5px rgba(166, 224, 212, 0.35);
+}
+
+/* Linhas das tabelas de fiabilidade */
+
+.reliability-table tbody tr {
+    transition: background-color 0.2s ease;
+}
+
+.reliability-table tbody tr:hover {
+    background-color: #EAF5F2;
+}
+
+/* Sublinhado animado nos links do menu */
+
+.nav-links a {
+    position: relative;
+}
+
+.nav-links a::after {
+    content: "";
+
+    position: absolute;
+    left: 13px;
+    right: 13px;
+    bottom: 5px;
+
+    height: 2px;
+
+    background: #1E9C8A;
+
+    border-radius: 2px;
+
+    transform: scaleX(0);
+    transform-origin: left;
+
+    transition: transform 0.3s ease;
+}
+
+.nav-links a:hover::after {
+    transform: scaleX(1);
+}
+
+/* Cartões de destaque com barra colorida no topo */
+
+.highlight-card::before {
+    content: "";
+
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 4px;
+
+    background: var(--brand-gradient);
+
+    transform: scaleX(0);
+    transform-origin: left;
+
+    transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.highlight-card {
+    position: relative;
+    overflow: hidden;
+}
+
+.highlight-card:hover::before {
+    transform: scaleX(1);
+}
+
+/* Cartões de serviço com número a deslizar */
+
+.service-number {
+    transition: letter-spacing 0.3s ease;
+}
+
+.service-card:hover .service-number {
+    letter-spacing: 0.2em;
+}
+
+
+/* =====================================================
+   1.2 ÍCONES
+===================================================== */
+
+/* Ícone destacado dos cartões */
+
+.card-icon {
+    width: 52px;
+    height: 52px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: linear-gradient(
+        135deg,
+        rgba(30,156,138,0.14),
+        rgba(27,111,154,0.14)
+    );
+
+    color: var(--action);
+
+    border: 1px solid rgba(30,156,138,0.25);
+    border-radius: 15px;
+
+    margin-bottom: 16px;
+
+    transition:
+        transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+        background 0.35s ease,
+        box-shadow 0.35s ease;
+}
+
+.card-icon svg {
+    width: 26px;
+    height: 26px;
+}
+
+.card-icon-soft {
+    background: rgba(30,156,138,0.09);
+    border-radius: 50%;
+}
+
+.facts article:hover .card-icon,
+.highlight-card:hover .card-icon,
+.service-card:hover .card-icon {
+    transform: scale(1.12) rotate(-6deg);
+
+    background: var(--brand-gradient);
+    color: #FFFFFF;
+
+    box-shadow: 0 8px 18px rgba(15, 107, 92, 0.3);
+}
+
+/* Ícone nos títulos dos cartões "Como funciona" */
+
+.how-card h3 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.title-icon {
+    width: 24px;
+    height: 24px;
+
+    flex-shrink: 0;
+
+    color: var(--action);
+}
+
+/* Ícones dos botões */
+
+.btn-icon {
+    width: 17px;
+    height: 17px;
+
+    margin-right: 8px;
+
+    flex-shrink: 0;
+
+    transition: transform 0.3s ease;
+}
+
+.btn-primary:hover .btn-icon,
+.btn-secondary:hover .btn-icon,
+.download-btn:hover .btn-icon {
+    transform: translateX(4px);
+}
+
+/* Checks dos planos */
+
+.check-icon {
+    width: 17px;
+    height: 17px;
+
+    flex-shrink: 0;
+
+    margin-right: 10px;
+
+    color: var(--action);
+
+    vertical-align: -3px;
+}
+
+.plan-features li {
+    display: flex;
+    align-items: center;
+
+    transition: color 0.25s ease, transform 0.25s ease;
+}
+
+.plan-features li:hover {
+    color: var(--fg);
+    transform: translateX(4px);
+}
+
+
+/* =====================================================
    2. RESET E CONFIGURAÇÕES GERAIS
 ===================================================== */
 
@@ -54,7 +505,7 @@
 
 html {
     scroll-behavior: smooth;
-    scroll-padding-top: 150px;
+    scroll-padding-top: 0px;
 }
 
 body {
@@ -100,7 +551,7 @@ h1, h2 {
 }
 
 section {
-    scroll-margin-top: 155px;
+    scroll-margin-top: 120px;
 }
 
 
@@ -266,7 +717,7 @@ header {
 ===================================================== */
 
 .top-bar {
-    min-height: 78px;
+    min-height: 70px;
 
     display: flex;
     align-items: center;
@@ -450,7 +901,7 @@ section.block {
 ===================================================== */
 
 .hero {
-    padding-top: 35px;
+    padding-top: 5px;
     padding-bottom: 85px;
 
     display: grid;
@@ -687,6 +1138,23 @@ section.block {
 
 .callout b {
     color: #FFFFFF;
+}
+
+.callout-link {
+    display: inline-block;
+
+    margin-top: 12px;
+
+    color: #A6E0D4;
+    font-weight: 700;
+    text-decoration: none;
+
+    transition: color 0.25s ease, transform 0.25s ease;
+}
+
+.callout-link:hover {
+    color: #FFFFFF;
+    transform: translateX(4px);
 }
 
 
@@ -1157,6 +1625,14 @@ section.block {
     border: 2px solid var(--yellow);
 
     transform: translateY(-8px);
+}
+
+.plan-featured.is-visible {
+    transform: translateY(-8px);
+}
+
+.plan-featured:hover {
+    transform: translateY(-13px);
 }
 
 .plan-badge {
