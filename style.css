@@ -203,45 +203,19 @@
 }
 
 
-/* Cartões: elevação suave no hover */
+/* Botões: elevação suave no hover (só nos que navegam) */
 
-.facts article,
-.how-card,
-.highlight-card,
-.service-card,
-.plan-card,
-.contact-card {
+.btn-primary,
+.btn-secondary,
+.plan-btn,
+.download-btn,
+.callout-link {
     transition:
         transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
-        box-shadow 0.35s ease;
-}
-
-.facts article:hover,
-.how-card:hover,
-.highlight-card:hover,
-.service-card:hover,
-.plan-card:hover,
-.contact-card:hover {
-    transform: translateY(-7px);
-    box-shadow: var(--shadow-strong);
-}
-
-/* Números dos passos a escalar no hover */
-
-.steps li {
-    transition: transform 0.3s ease;
-}
-
-.steps li:hover {
-    transform: translateX(6px);
-}
-
-.step-number {
-    transition: transform 0.3s ease;
-}
-
-.steps li:hover .step-number {
-    transform: scale(1.15) rotate(8deg);
+        box-shadow 0.35s ease,
+        background 0.35s ease,
+        color 0.35s ease,
+        border-color 0.35s ease;
 }
 
 /* Badge do plano destacado */
@@ -276,14 +250,10 @@
     box-shadow: var(--shadow-soft);
 }
 
-/* Logótipo do cabeçalho a rodar ligeiramente */
+/* Logótipo do cabeçalho */
 
 .logo-img {
-    transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.logo-bolha:hover .logo-img {
-    transform: rotate(-8deg) scale(1.08);
+    transition: none;
 }
 
 /* Círculo de utilizador */
@@ -295,16 +265,6 @@
 .user-circle:hover {
     transform: scale(1.12);
     box-shadow: 0 0 0 5px rgba(166, 224, 212, 0.35);
-}
-
-/* Linhas das tabelas de fiabilidade */
-
-.reliability-table tbody tr {
-    transition: background-color 0.2s ease;
-}
-
-.reliability-table tbody tr:hover {
-    background-color: #EAF5F2;
 }
 
 /* Sublinhado animado nos links do menu */
@@ -337,55 +297,11 @@
     transform: scaleX(1);
 }
 
-/* Cartões de destaque com barra colorida no topo */
-
-.highlight-card::before {
-    content: "";
-
-    position: absolute;
-    top: 0;
-    left: 0;
-
-    width: 100%;
-    height: 4px;
-
-    background: var(--brand-gradient);
-
-    transform: scaleX(0);
-    transform-origin: left;
-
-    transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.highlight-card {
-    position: relative;
-    overflow: hidden;
-}
-
-.highlight-card:hover::before {
-    transform: scaleX(1);
-}
-
-/* Cartões de serviço com número a deslizar */
-
-.service-number {
-    transition: letter-spacing 0.3s ease;
-}
-
-.service-card:hover .service-number {
-    letter-spacing: 0.2em;
-}
-
-
-/* =====================================================
-   1.2 ÍCONES
-===================================================== */
-
-/* Ícone destacado dos cartões */
+/* Ícone dos cartões (menor) */
 
 .card-icon {
-    width: 52px;
-    height: 52px;
+    width: 38px;
+    height: 38px;
 
     display: flex;
     align-items: center;
@@ -400,19 +316,14 @@
     color: var(--action);
 
     border: 1px solid rgba(30,156,138,0.25);
-    border-radius: 15px;
+    border-radius: 11px;
 
-    margin-bottom: 16px;
-
-    transition:
-        transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
-        background 0.35s ease,
-        box-shadow 0.35s ease;
+    margin-bottom: 14px;
 }
 
 .card-icon svg {
-    width: 26px;
-    height: 26px;
+    width: 18px;
+    height: 18px;
 }
 
 .card-icon-soft {
@@ -420,62 +331,43 @@
     border-radius: 50%;
 }
 
-.facts article:hover .card-icon,
-.highlight-card:hover .card-icon,
-.service-card:hover .card-icon {
-    transform: scale(1.12) rotate(-6deg);
-
-    background: var(--brand-gradient);
-    color: #FFFFFF;
-
-    box-shadow: 0 8px 18px rgba(15, 107, 92, 0.3);
-}
-
 /* Ícone nos títulos dos cartões "Como funciona" */
 
 .how-card h3 {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 8px;
 }
 
 .title-icon {
-    width: 24px;
-    height: 24px;
+    width: 18px;
+    height: 18px;
 
     flex-shrink: 0;
 
     color: var(--action);
 }
 
-/* Ícones dos botões */
+/* Ícones dos botões (menor) */
 
 .btn-icon {
-    width: 17px;
-    height: 17px;
+    width: 14px;
+    height: 14px;
 
-    margin-right: 8px;
+    margin-right: 7px;
 
     flex-shrink: 0;
-
-    transition: transform 0.3s ease;
-}
-
-.btn-primary:hover .btn-icon,
-.btn-secondary:hover .btn-icon,
-.download-btn:hover .btn-icon {
-    transform: translateX(4px);
 }
 
 /* Checks dos planos */
 
 .check-icon {
-    width: 17px;
-    height: 17px;
+    width: 14px;
+    height: 14px;
 
     flex-shrink: 0;
 
-    margin-right: 10px;
+    margin-right: 8px;
 
     color: var(--action);
 
@@ -485,13 +377,6 @@
 .plan-features li {
     display: flex;
     align-items: center;
-
-    transition: color 0.25s ease, transform 0.25s ease;
-}
-
-.plan-features li:hover {
-    color: var(--fg);
-    transform: translateX(4px);
 }
 
 
@@ -967,7 +852,6 @@ section.block {
     font-weight: 700;
     text-decoration: none;
 
-    transition: 0.25s ease;
 }
 
 .btn-primary:hover {
@@ -1629,10 +1513,6 @@ section.block {
 
 .plan-featured.is-visible {
     transform: translateY(-8px);
-}
-
-.plan-featured:hover {
-    transform: translateY(-13px);
 }
 
 .plan-badge {
