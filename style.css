@@ -1574,6 +1574,7 @@ section.block {
     color: #C5D4DC;
 
     overflow: hidden;
+    overflow: clip;
 }
 
 /* Brilho decorativo no canto */
@@ -1795,63 +1796,290 @@ section.block {
    20. RODAPÉ
 ===================================================== */
 
-footer {
-    margin-top: 50px;
+.site-footer {
+    position: relative;
 
-    border-top: 1px solid var(--strong);
+    margin-top: 60px;
 
-    padding: 30px 20px;
+    padding: 70px 20px 28px;
 
-    color: var(--muted);
+    background: linear-gradient(
+        170deg,
+        #10304A,
+        #0B2230 60%
+    );
+
+    color: #A9C2CC;
+
+    border-radius: 36px 36px 0 0;
+
+    overflow: hidden;
+    overflow: clip;
+}
+
+/* Linha com o gradiente da marca no topo */
+
+.site-footer::before {
+    content: "";
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+
+    height: 4px;
+
+    background: var(--brand-gradient);
+}
+
+/* Brilho decorativo */
+
+.site-footer::after {
+    content: "";
+
+    position: absolute;
+    top: -160px;
+    right: -120px;
+
+    width: 420px;
+    height: 420px;
+
+    border-radius: 50%;
+
+    background: radial-gradient(
+        circle,
+        rgba(30,156,138,0.30),
+        transparent 70%
+    );
+
+    pointer-events: none;
 }
 
 .footer-inner {
+    position: relative;
+    z-index: 1;
+
     width: min(1180px, 100%);
     margin-inline: auto;
+}
 
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
 
-    gap: 20px;
-    flex-wrap: wrap;
+/* Parte de cima: marca + colunas */
+
+.footer-top {
+    display: grid;
+
+    grid-template-columns: 1.6fr 1fr 1fr 1.3fr;
+
+    gap: 40px;
+
+    padding-bottom: 45px;
 }
 
 .footer-logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+
     font-family: var(--font-display);
     font-weight: 800;
-    font-size: 20px;
-}
+    font-size: 24px;
 
-.footer-links {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 18px;
-}
+    color: #FFFFFF;
 
-.footer-links a {
-    color: var(--muted);
-    font-size: 13px;
     text-decoration: none;
 }
 
-.footer-links a:hover {
-    color: var(--action);
+.footer-logo img {
+    width: 48px;
+    height: 48px;
+
+    object-fit: contain;
+
+    background: #FFFFFF;
+
+    padding: 4px;
+
+    border-radius: 12px;
 }
 
-.footer-legal {
-    width: 100%;
+.footer-brand p {
+    margin-top: 18px;
 
-    padding-top: 20px;
-    margin-top: 10px;
+    max-width: 320px;
 
-    border-top: 1px solid var(--line);
+    font-size: 14px;
+    line-height: 1.65;
+}
+
+
+/* Redes sociais */
+
+.footer-social {
+    display: flex;
+    gap: 10px;
+
+    margin-top: 22px;
+}
+
+.footer-social a {
+    width: 40px;
+    height: 40px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: #A6E0D4;
+
+    background: rgba(255,255,255,0.06);
+
+    border: 1px solid rgba(166,224,212,0.18);
+    border-radius: 12px;
+
+    transition: background 0.25s ease, color 0.25s ease, transform 0.25s ease;
+}
+
+.footer-social a:hover {
+    background: var(--action-light);
+    color: #FFFFFF;
+    transform: translateY(-3px);
+}
+
+.footer-social svg {
+    width: 18px;
+    height: 18px;
+}
+
+
+/* Colunas de links */
+
+.footer-col h4 {
+    font-size: 13px;
+    font-family: var(--font-mono);
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+
+    color: #FFFFFF;
+
+    margin-bottom: 18px;
+}
+
+.footer-col ul {
+    list-style: none;
+
+    padding: 0;
+    margin: 0;
+
+    display: grid;
+    gap: 11px;
+}
+
+.footer-col a {
+    position: relative;
+
+    color: #A9C2CC;
+
+    font-size: 14px;
+
+    text-decoration: none;
+
+    transition: color 0.2s ease;
+}
+
+.footer-col a:hover {
+    color: #A6E0D4;
+}
+
+/* Contactos com ícone */
+
+.footer-contacts li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    font-size: 14px;
+}
+
+.footer-contacts svg {
+    width: 16px;
+    height: 16px;
+
+    flex-shrink: 0;
+
+    color: var(--action-light);
+}
+
+
+/* Parte de baixo */
+
+.footer-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+
+    padding-top: 24px;
+
+    border-top: 1px solid rgba(166,224,212,0.15);
+
+    font-size: 13px;
+}
+
+.footer-bottom a {
+    color: #A6E0D4;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.footer-bottom a:hover {
+    color: #FFFFFF;
+}
+
+.footer-legal-links {
+    display: flex;
+    gap: 20px;
 
     font-family: var(--font-mono);
     font-size: 11px;
-
-    text-align: center;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
 }
+
+
+/* Botão voltar ao topo */
+
+.footer-bottom .footer-to-top {
+    width: 42px;
+    height: 42px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: var(--brand-gradient);
+    color: #FFFFFF;
+
+    border-radius: 50%;
+
+    box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.footer-bottom .footer-to-top:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 26px rgba(0,0,0,0.35);
+}
+
+.footer-to-top svg {
+    width: 18px;
+    height: 18px;
+}
+
 
 
 /* =====================================================
@@ -1888,6 +2116,14 @@ footer {
 
     .contact-card {
         grid-template-columns: 1fr;
+    }
+
+    .footer-top {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .footer-brand {
+        grid-column: 1 / -1;
     }
 
 }
@@ -2036,13 +2272,24 @@ footer {
         justify-self: stretch;
     }
 
-    .footer-inner {
-        flex-direction: column;
-        text-align: center;
+    .site-footer {
+        padding: 50px 18px 24px;
+        border-radius: 26px 26px 0 0;
     }
 
-    .footer-links {
-        justify-content: center;
+    .footer-top {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 32px 20px;
+    }
+
+    .footer-col:last-child {
+        grid-column: 1 / -1;
+    }
+
+    .footer-bottom {
+        flex-direction: column;
+        text-align: center;
+        gap: 14px;
     }
 
 }
